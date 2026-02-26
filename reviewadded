@@ -1,0 +1,10 @@
+cURL Command:
+curl -X PUT "http://localhost:5000/auth/review/1?review=Excellent%20Book"
+
+Output:
+{
+  "message": "Review added/updated",
+  "reviews": {
+    "user": "Excellent Book"
+  }
+}
