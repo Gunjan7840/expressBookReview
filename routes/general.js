@@ -2,7 +2,9 @@ const express = require('express');
 const axios = require('axios');
 const router = express.Router();
 
-// Sample book data
+/*
+  Book data source (simulating JSON data provided in assignment)
+*/
 const books = {
   1: {
     isbn: "1",
@@ -18,19 +20,26 @@ const books = {
   }
 };
 
-// ✅ Get all books
+/*
+  Route 1: Retrieve all books
+  Uses async/await with Axios to demonstrate asynchronous handling.
+*/
 router.get('/books', async (req, res) => {
   try {
-    // Simulate async HTTP call using Axios
+    // Example async HTTP call using Axios
     await axios.get('https://jsonplaceholder.typicode.com/posts/1');
 
+    // Return full book collection
     res.status(200).json(books);
   } catch (error) {
     res.status(500).json({ message: "Error retrieving books" });
   }
 });
 
-// ✅ Get book by ISBN
+/*
+  Route 2: Retrieve book by ISBN
+  Extracts ISBN from request parameters and returns matching book.
+*/
 router.get('/books/isbn/:isbn', async (req, res) => {
   try {
     await axios.get('https://jsonplaceholder.typicode.com/posts/1');
@@ -47,13 +56,17 @@ router.get('/books/isbn/:isbn', async (req, res) => {
   }
 });
 
-// ✅ Get books by Author
+/*
+  Route 3: Retrieve books by Author
+  Filters book collection based on author name from URL parameter.
+*/
 router.get('/books/author/:author', async (req, res) => {
   try {
     await axios.get('https://jsonplaceholder.typicode.com/posts/1');
 
     const author = req.params.author;
 
+    // Filter books where author matches (case-insensitive)
     const result = Object.values(books).filter(
       book => book.author.toLowerCase() === author.toLowerCase()
     );
@@ -68,13 +81,17 @@ router.get('/books/author/:author', async (req, res) => {
   }
 });
 
-// ✅ Get books by Title
+/*
+  Route 4: Retrieve books by Title
+  Filters book collection using title parameter.
+*/
 router.get('/books/title/:title', async (req, res) => {
   try {
     await axios.get('https://jsonplaceholder.typicode.com/posts/1');
 
     const title = req.params.title;
 
+    // Filter books by title (case-insensitive comparison)
     const result = Object.values(books).filter(
       book => book.title.toLowerCase() === title.toLowerCase()
     );
@@ -89,7 +106,10 @@ router.get('/books/title/:title', async (req, res) => {
   }
 });
 
-// ✅ Get Reviews
+/*
+  Route 5: Retrieve book reviews by ISBN
+  Returns review object associated with the specified book.
+*/
 router.get('/books/review/:isbn', async (req, res) => {
   try {
     await axios.get('https://jsonplaceholder.typicode.com/posts/1');
